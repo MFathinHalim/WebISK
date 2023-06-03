@@ -1,42 +1,18 @@
 const path = require('path');
 const express = require('express')
 const bodyParser = require('body-parser')
-const axios = require("axios");
+
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 
-var data = []
-
-axios.get("https://lurkr.gg/levels/1054414599945998416")
-  .then(response => {
-    const htmlContent = response.data;
-    const dom = new JSDOM(htmlContent, {
-      url: "https://lurkr.gg/levels/1054414599945998416",
-      contentType: "text/html",
-      includeNodeLocations: true,
-      storageQuota: 10000000
-    });
-
-    const dataNamaList = dom.window.document.querySelectorAll('.text-ellipsis');
-    const dataLevelList = dom.window.document.querySelectorAll('.absolute');
-    const dataLeveling = [];
-
-    const minLength = Math.min(dataNamaList.length, dataLevelList.length);
-
-    let levelIndex = 0;
-    for (let i = 0; i < minLength; i++) {
-      const nama = dataNamaList[i].textContent;
-      let level = dataLevelList[levelIndex].textContent;
-
-      while (isNaN(parseFloat(level))) {
-        levelIndex++; // Move to the next level element
-        level = dataLevelList[levelIndex].textContent;
-      }
-      
-      dataLeveling.push({ nama, level });
-      levelIndex++; // Move to the next level element for the next iteration
-    }
-    console.log(dataLeveling);
+const leaderboard = []
+// Fetch HTML content from the URL
+JSDOM.fromURL("https://lurkr.gg/levels/1054414599945998416")
+  .then(dom => {
+    const names = dom.window.document.querySelectorAll("td:nth-child(2) span")
+    const levels = dom.window.document.querySelectorAll("td:last-child span")
+    names.forEach((name, i) => leaderboard.push({ name: name.textContent, level: levels[i].textContent }))
+    console.log(leaderboard)
   })
   .catch(error => {
     console.error("Error fetching HTML content:", error);
