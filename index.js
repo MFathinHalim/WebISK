@@ -5,21 +5,38 @@ const axios = require("axios");
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 
-// Fetch HTML content from the URL
+var data = []
+
 axios.get("https://lurkr.gg/levels/1054414599945998416")
   .then(response => {
     const htmlContent = response.data;
-    
-    // Create JSDOM instance with fetched HTML content
     const dom = new JSDOM(htmlContent, {
       url: "https://lurkr.gg/levels/1054414599945998416",
       contentType: "text/html",
       includeNodeLocations: true,
       storageQuota: 10000000
     });
-    
-    // Query and print <span> elements
-    dom.window.document.querySelectorAll('span').forEach(element => console.log(element.textContent));
+
+    const dataNamaList = dom.window.document.querySelectorAll('.text-ellipsis');
+    const dataLevelList = dom.window.document.querySelectorAll('.absolute');
+    const dataLeveling = [];
+
+    const minLength = Math.min(dataNamaList.length, dataLevelList.length);
+
+    let levelIndex = 0;
+    for (let i = 0; i < minLength; i++) {
+      const nama = dataNamaList[i].textContent;
+      let level = dataLevelList[levelIndex].textContent;
+
+      while (isNaN(parseFloat(level))) {
+        levelIndex++; // Move to the next level element
+        level = dataLevelList[levelIndex].textContent;
+      }
+      
+      dataLeveling.push({ nama, level });
+      levelIndex++; // Move to the next level element for the next iteration
+    }
+    console.log(dataLeveling);
   })
   .catch(error => {
     console.error("Error fetching HTML content:", error);
