@@ -20,24 +20,33 @@ app.get("/", function (req, res) {
 })
 
 app.get("/leaderboard", function (req, res) {
-  const leaderboard = []
-  // Fetch HTML content from the URL
-JSDOM.fromURL("https://lurkr.gg/levels/1054414599945998416")
-  .then(dom => {
-    const names = dom.window.document.querySelectorAll("td:nth-child(2) span")
-    const levels = dom.window.document.querySelectorAll("td:last-child span")
-    names.forEach((name, i) => leaderboard.push({ name: name.textContent, level: levels[i].textContent }))
-    console.log(leaderboard)
-    res.render("leaderboard",{
-      data: leaderboard
-    })
-  })
-  .catch(error => {
-    console.error("Error fetching HTML content:", error);
-  });
+  const leaderboard = [];
 
-  
-})
+  JSDOM.fromURL("https://lurkr.gg/levels/1054414599945998416")
+    .then(dom => {
+      const names = dom.window.document.querySelectorAll("td:nth-child(2) span");
+      const levels = dom.window.document.querySelectorAll("td:last-child span");
+      const imgs = dom.window.document.querySelectorAll(".gap-4 > img");
+
+      names.forEach((name, i) => {
+        leaderboard.push({
+          peringkat: i + 1,
+          name: name.textContent,
+          level: levels[i].textContent,
+          pp: imgs[i].getAttribute("src")
+        });
+      });
+
+      console.log(leaderboard);
+      res.render("leaderboard", {
+        data: leaderboard
+      });
+    })
+    .catch(error => {
+      console.error("Error fetching HTML content:", error);
+    });
+});
+
 
 app.listen(8080, (req, res) => {
     Host: process.env.NODE_ENV !== 'production' ? 'localhost' : '0.0.0.0',
