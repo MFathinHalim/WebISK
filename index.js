@@ -1,25 +1,18 @@
 const path = require('path');
 const express = require('express')
 const bodyParser = require('body-parser')
-const axios = require("axios");
+
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 
+const leaderboard = []
 // Fetch HTML content from the URL
-axios.get("https://lurkr.gg/levels/1054414599945998416")
-  .then(response => {
-    const htmlContent = response.data;
-    
-    // Create JSDOM instance with fetched HTML content
-    const dom = new JSDOM(htmlContent, {
-      url: "https://lurkr.gg/levels/1054414599945998416",
-      contentType: "text/html",
-      includeNodeLocations: true,
-      storageQuota: 10000000
-    });
-    
-    // Query and print <span> elements
-    dom.window.document.querySelectorAll('span').forEach(element => console.log(element.textContent));
+JSDOM.fromURL("https://lurkr.gg/levels/1054414599945998416")
+  .then(dom => {
+    const names = dom.window.document.querySelectorAll("td:nth-child(2) span")
+    const levels = dom.window.document.querySelectorAll("td:last-child span")
+    names.forEach((name, i) => leaderboard.push({ name: name.textContent, level: levels[i].textContent }))
+    console.log(leaderboard)
   })
   .catch(error => {
     console.error("Error fetching HTML content:", error);
