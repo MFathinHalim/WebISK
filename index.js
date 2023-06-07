@@ -57,6 +57,6 @@ app.get("/leaderboard", function (req, res) {
 });
 
 
-app.listen(8080, process.env.NODE_ENV !== 'production' ? 'localhost' : '0.0.0.0', (req, res) => {
+app.listen(8080, (req, res) => {
   console.log("Server is running on port 8080")
 })
