@@ -1,6 +1,11 @@
 const path = require('path');
 const express = require('express')
 const bodyParser = require('body-parser')
+const { mainModel} = require("./models/post")
+const mongoose = require('mongoose');
+require('dotenv').config();
+
+
 
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
@@ -47,8 +52,37 @@ app.get("/leaderboard", function (req, res) {
     });
 });
 
-
-app.listen(8080, (req, res) => {
-    Host: process.env.NODE_ENV !== 'production' ? 'localhost' : '0.0.0.0',
-    console.log("Server is running on port 8080")
+app.get("/saran", function (req, res) {
+	res.render("saran")
 })
+
+app.post("/postsaran", async function(req, res) {
+  const jenis = req.body.jenis;
+  const saran = req.body.saran;
+
+  console.log(jenis);
+  console.log(saran);
+
+  await mainModel.create({ jenis, saran})
+
+  res.redirect("/")
+})
+
+
+const uri = process.env.MONGODBURI;
+const port = 8080;
+
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 5000, // Increase the server selection timeout
+})
+  .then(() => {
+    console.log('Connected to the database');
+    app.listen(port, () => {
+      console.log(`App is running on port ${port}`);
+    });
+  })
+  .catch((error) => {
+    console.error('Database connection error:', error);
+  });
