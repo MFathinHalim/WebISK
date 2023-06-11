@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ISK WebPage | <%= title %></title>
+    <link rel="icon" type="image/gif" href="image/LogoISK.gif" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/reveal.css">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-black">
+      <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="#"
+          >Intergalactic Science Kingdom</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link <%= title == 'Home' ? 'active' : null %>"
+                href="#"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link <%= title == 'Staff' ? 'active' : null %>"
+                href="#"
+                >Staff</a
+              >
+            </li>
+            <li class="nav-item <%= title == 'Rules' ? 'active' : null %>">
+              <a class="nav-link" href="#">Rules</a>
+            </li>
+            <li class="nav-item <%= title == 'Roles' ? 'active' : null %>">
+              <a class="nav-link" href="#">Roles</a>
+            </li>
+            <li class="nav-item <%= title == 'Channels' ? 'active' : null %>">
+              <a class="nav-link" href="#">Channels</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link <%= title == 'Leaderboard' ? 'active' : null %>"
+                href="#"
+                >Leaderboard</a
+              >
+            </li>
+          </ul>
+          <a href="https://discord.gg/fajrulfx" class="btn btn-outline-primary"
+            >Discord</a
+          >
+        </div>
+      </div>
+    </nav>
+  </body>
+</html>
