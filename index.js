@@ -1,12 +1,10 @@
 const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
-const { mainModel } = require("./models/post");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-const jsdom = require("jsdom");
-const { JSDOM } = jsdom;
+const { JSDOM } = require("jsdom");
 
 let leaderboard = [];
 
@@ -38,6 +36,8 @@ setInterval(refreshData, 60000);
 
 const app = express();
 
+const saranRouter = require("./routes/saran")
+
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "/public")));
 app.use(express.static(path.join(__dirname, "/node_modules/bootstrap/dist")))
@@ -58,22 +58,6 @@ app.get("/leaderboard", function (req, res) {
   });
 });
 
-app.get("/saran", function (req, res) {
-  res.render("saran");
-});
-
-app.post("/postsaran", async function (req, res) {
-  const jenis = req.body.jenis;
-  const saran = req.body.saran;
-
-  console.log(jenis);
-  console.log(saran);
-
-  await mainModel.create({ jenis, saran });
-
-  res.redirect("/");
-});
-
 const uri = process.env.MONGODBURI;
 const port = 8080;
 
@@ -85,10 +69,15 @@ mongoose
   })
   .then(() => {
     console.log("Connected to the database");
+    app.use("/saran", saranRouter)
     app.listen(port, () => {
       console.log(`App is running on port ${port}`);
     });
   })
   .catch((error) => {
     console.error("Database connection error:", error);
+    console.log("Disabled /saran");
+    app.listen(port, () => {
+      console.log(`App is running on port ${port}`);
+    });
   });
