@@ -26,26 +26,14 @@ const getChannelSaran = async () => {
   return channelSaran;
 };
 
-let leaderboard = [];
+let levelingData;
 
 const refreshData = () => {
   JSDOM.fromURL("https://lurkr.gg/levels/1054414599945998416")
     .then((dom) => {
-      leaderboard = [];
-      const names = dom.window.document.querySelectorAll(
-        "td:nth-child(2) span"
-      );
-      const levels = dom.window.document.querySelectorAll("td:last-child span");
-      const imgs = dom.window.document.querySelectorAll(".gap-4 > img");
-
-      names.forEach((name, i) => {
-        leaderboard.push({
-          peringkat: i + 1,
-          name: name.textContent,
-          level: levels[i].textContent,
-          pp: imgs[i].getAttribute("src"),
-        });
-      });
+      levelingData = dom.window.document.querySelector("script#__NEXT_DATA__").textContent
+      levelingData = JSON.parse(levelingData)
+      levelingData = levelingData.props.pageProps
     })
     .catch((error) => {
       console.error("Error fetching HTML content:", error);
@@ -69,13 +57,11 @@ app.use(
 );
 
 app.get("/", function (req, res) {
-  res.render("home", { title: "Home", leaderboard });
+  res.render("home", { title: "Home", leaderboard: levelingData.levels });
 });
 
 app.get("/leaderboard", function (req, res) {
-  res.render("leaderboard", {
-    data: leaderboard,
-  });
+  res.render("leaderboard", { title: "Leaderboard", levelingData });
 });
 
 const port = 8080;

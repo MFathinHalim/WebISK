@@ -1,106 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include("partials/header") %>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About</title>
-  <link rel="icon" type="image/gif" href="LogoISK.gif">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-
-</head>
-<style>
-  li {
-    text-decoration: none;
-    margin-left: 0;
-    list-style-type: none;
-  }
-
-  ul {
-    list-style-type: none;
-    margin: 0;
-  }
-
-  a {
-    color: deepskyblue;
-    text-decoration: none;
-  }
-</style>
-<header class="bg-dark " style=" margin-bottom: 10px; padding: 0px; position: sticky; position: -webkit-sticky; z-index: 1; width: inherit;
-  top: 0;">
-  <nav class="bg-dark navbar navbar-expand-lg text-white ">
-    <div class="container-fluid">
-      <img src="LogoISK.gif" alt="Logo" width="30" height="30" style="margin-right: 10px;"
-        class="d-inline-block align-text-top">
-      <a style="margin-right: 10px;" href="https://webisk.mfathinhalim.repl.co/">Intergalatic Science Kingdom</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon navbar-dark"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="border border-success btn btn-success nav-link text-white" style="margin-right: 10px;"
-              href="https://discord.gg/fajrulfx">Join Now!</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Go To
-            </a>
-            <ul class="dropdown-menu bg-dark">
-              <li><a class="dropdown-item text-white dr" href="#Rules">Rules</a></li>
-              <li><a class="dropdown-item text-white" href="#Roles">Roles</a></li>
-              <li><a class="dropdown-item text-white" href="#Channel">Channel</a></li>
-              <li>
-                <a class="dropdown-item text-white mb-0"
-                  href="https://intergalacticsciencekingdom-lightmode.danurwendafaran.repl.co/">Light Mode</a>
-              </li>
-              <li>
-                <a class="dropdown-item text-white mb-0"
-                  href="https://webisk.mfathinhalim.repl.co/english.html">English Language</a>
-              </li>
-              <li>
-                <hr class="dropdown-divider text-white border-white">
-              </li>
-              <li>
-                <a class="dropdown-item text-white" href="https://lurkr.gg/levels/1054414599945998416">ISK Leaderboard
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item text-white" href="/saran">Saran dan Kritik
-                </a>
-              </li>
-              <li><a class="border border-success dropdown-item text-white " href="#https://discord.gg/fajrulfx">Join
-                  Now!</a></li>
-
-          </li>
-        </ul>
-
-
+<div class="container-fluid text-center my-3">
+  <div class="row px-2">
+    <div class="col-12 col-lg-8">
+      <div class="bg-dark pt-3 pb-1 rounded mb-2 mb-lg-0">
+        <h1 class="text-white fw-bold mb-3">Leaderboard</h1>
+        <div class="overflow-x-scroll px-3 mx-2">
+          <table class="table table-dark fs-4 align-middle">
+            <thead>
+              <tr>
+                <th class="px-3" scope="col">Rank</th>
+                <th class="px-3" scope="col" colspan="2">User</th>
+                <th class="px-3" scope="col">XP</th>
+                <th class="px-3" scope="col">Messages</th>
+                <th class="px-3" scope="col">Level</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% levelingData.levels.forEach((user, i) => { %>
+              <tr>
+                <td class="px-3"><%= i + 1 %></td>
+                <td class="px-3">
+                  <img
+                    src="https://cdn.discordapp.com/avatars/<%= user.userId %>/<%= user.avatar %>.webp?size=64"
+                    alt="<%= user.tag %> avatar"
+                    class="rounded-circle border"
+                    width="64"
+                    onerror="this.onerror=null; this.src='https://cdn.discordapp.com/embed/avatars/1.png'"
+                  />
+                </td>
+                <td class="px-3"><%= user.tag %></td>
+                <td class="px-3"><%= user.xp %></td>
+                <td class="px-3"><%= user.messageCount %></td>
+                <td class="px-3"><%= user.level %></td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-  </nav>
-
-</header>
-
-<body class="text-white" style="margin: 10px; background-color: #35393e; text-align: center;">
-    <% data.forEach(element => { %>
-
-        <div class="card m-1 bg-dark">
-            <div class="card-body">
-                <img class="rounded" src="<%= element.pp %>" style="width: 50px; height: 50px;">
-                <h3 class="card-subtitle text-white mb-2">Peringkat <strong style="color: yellow;"><%= element.peringkat %></strong></h3>
-                <h3 class="card-title text-white text-xl"><%= element.name %></h3>
-                <h6 class="card-subtitle text-white mb-2">Level <%= element.level %></h6>
+    <div class="col-12 col-lg-4">
+      <div class="row">
+      <div class="col-12 col-md-6 col-lg-12">
+      <div class="card mt-2 mt-lg-0 mb-3 bg-dark text-white">
+        <div class="card-body">
+          <h1 class="card-title mb-3">Multipliers</h1>
+          <div class="card-text fs-5">
+            <% levelingData.multipliers.forEach(multiplier => { %>
+            <div class="mb-4">
+              <h4><%= multiplier.type %> - x<%= multiplier.multiplier %></h4>
+              <ul class="text-start m-auto">
+                <% multiplier.targets.forEach(target => { %>
+                  <% if ( multiplier.type == "Channel" ) { %>
+                  <li>
+                    <%- target.type === 0 ? `<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" class="ml-2" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><g id="Hashtag"><path d="M20.435,15.506H16.2l.61-7h3.63a.5.5,0,0,0,.5-.5.5.5,0,0,0-.5-.5H16.9l.34-3.87a.509.509,0,0,0-.46-.54.5.5,0,0,0-.54.46l-.35,3.95H8.9l.34-3.87a.509.509,0,0,0-.46-.54.491.491,0,0,0-.54.46l-.35,3.95H3.565a.5.5,0,0,0-.5.5.5.5,0,0,0,.5.5h4.24l-.62,7H3.565a.5.5,0,0,0-.5.5.5.5,0,0,0,.5.5h3.54l-.34,3.86a.508.508,0,0,0,.45.54h.05a.516.516,0,0,0,.5-.46l.34-3.94h7l-.34,3.86a.508.508,0,0,0,.45.54h.05a.516.516,0,0,0,.5-.46l.34-3.94h4.33a.5.5,0,0,0,.5-.5A.5.5,0,0,0,20.435,15.506Zm-5.25,0H8.2l.61-7h7Z"></path></g></svg>`
+                    : target.type === 15 ? `<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="ml-2" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10"></path><path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2"></path></svg>` : null %>
+                    <%= target.name %>
+                  </li>
+                  <% } else if ( multiplier.type == "Role" ) { %>
+                  <li style="color: #<%= target.color.toString(16) %>; ">@<%= target.name %></li>
+                  <% } %>
+                <% }) %>
+              </ul>
             </div>
+            <% }) %>
+          </div>
         </div>
+      </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-12">
+      <div class="card mt-3 bg-dark text-white">
+        <div class="card-body">
+          <h1 class="card-title mb-3">Role Rewards</h1>
+          <div class="card-text fs-5">
+            <ul class="list-unstyled">
+              <% levelingData.roleRewards.forEach(reward => { %>
+              <li>Level <%= reward.level %> - <span style="color: #<%= reward.roles[0].color.toString(16) %>">@<%= reward.roles[0].name %></span></li>
+              <% }) %>
+            </ul>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <% }); %>
-</body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-
-</html>
+<%- include("partials/footer") %>
