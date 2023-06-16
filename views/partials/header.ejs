@@ -36,22 +36,12 @@
                 >Home</a
               >
             </li>
-            <!-- <li class="nav-item"> -->
-            <!--   <a -->
-            <!--     class="nav-link <%= title == 'Staff' ? 'active' : null %>" -->
-            <!--     href="#" -->
-            <!--     >Staff</a -->
-            <!--   > -->
-            <!-- </li> -->
-            <!-- <li class="nav-item <%= title == 'Rules' ? 'active' : null %>"> -->
-            <!--   <a class="nav-link" href="#">Rules</a> -->
-            <!-- </li> -->
-            <!-- <li class="nav-item <%= title == 'Roles' ? 'active' : null %>"> -->
-            <!--   <a class="nav-link" href="#">Roles</a> -->
-            <!-- </li> -->
-            <!-- <li class="nav-item <%= title == 'Channels' ? 'active' : null %>"> -->
-            <!--   <a class="nav-link" href="#">Channels</a> -->
-            <!-- </li> -->
+            <li class="nav-item <%= title == 'Rules' ? 'active' : null %>">
+              <a class="nav-link" href="/rules">Rules</a>
+            </li>
+            <li class="nav-item <%= title == 'Information' ? 'active' : null %>">
+              <a class="nav-link" href="/info">Info</a>
+            </li>
             <li class="nav-item">
               <a
                 class="nav-link <%= title == 'Leaderboard' ? 'active' : null %>"
@@ -73,5 +63,3 @@
         </div>
       </div>
     </nav>
-  </body>
-</html>
