@@ -60,6 +60,14 @@ app.get("/", function (req, res) {
   res.render("home", { title: "Home", leaderboard: levelingData.levels });
 });
 
+app.get("/rules", (req, res) => {
+  res.render("rules", { title: "Rules" })
+})
+
+app.get("/info", (req, res) => {
+  res.render("info", { title: "Information" })
+})
+
 app.get("/leaderboard", function (req, res) {
   res.render("leaderboard", { title: "Leaderboard", levelingData });
 });
