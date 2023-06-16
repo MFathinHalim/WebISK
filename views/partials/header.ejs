@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -7,10 +7,10 @@
     <title>ISK WebPage | <%= title %></title>
     <link rel="icon" type="image/gif" href="image/LogoISK.gif" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/reveal.css" />
   </head>
 
-  <body class="bg-dark bg-opacity-75">
+  <body class="bg-dark bg-opacity-75 d-flex flex-column h-100">
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-black">
       <div class="container-fluid">
         <a class="navbar-brand fw-bold" href="/"
@@ -36,11 +36,19 @@
                 >Home</a
               >
             </li>
-            <li class="nav-item <%= title == 'Rules' ? 'active' : null %>">
-              <a class="nav-link" href="/rules">Rules</a>
+            <li class="nav-item">
+              <a
+                class="nav-link <%= title == 'Rules' ? 'active' : null %>"
+                href="/rules"
+                >Rules</a
+              >
             </li>
-            <li class="nav-item <%= title == 'Information' ? 'active' : null %>">
-              <a class="nav-link" href="/info">Info</a>
+            <li class="nav-item">
+              <a
+                class="nav-link <%= title == 'Information' ? 'active' : null %>"
+                href="/info"
+                >Info</a
+              >
             </li>
             <li class="nav-item">
               <a
@@ -63,3 +71,5 @@
         </div>
       </div>
     </nav>
+  </body>
+</html>
