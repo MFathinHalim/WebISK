@@ -1,6 +1,7 @@
 <%- include("partials/header") %>
 
-<div class="px-4 pb-5 text-center bg-black text-secondary">
+<div class="px-4 pb-5 text-center text-secondary" style="height: 100%;">
+  <br>
   <img
     class="d-block mx-auto mb-4 reveal fade-bottom"
     src="image/LogoISK.gif"
@@ -9,7 +10,7 @@
   <h1 class="display-5 text-white fw-bold reveal fade-bottom">
     Intergalactic Science Kingdom
   </h1>
-  <div class="col-lg-6 mx-auto reveal fade-bottom">
+  <div class="col-lg-6 mx-auto reveal fade-bottom " style='@import "bootstrap/functions";@import "bootstrap/variables";@each $color, $value in $theme-colors {@if ((lightness($value)) < 60 and (hue($value)) > 45) {.bg-#{$color} {@extend .text-light}}}/* remember to import Bootstrap after the changes */ @import "bootstrap";'>
     <p class="lead mt-2 mb-3">
       Intergalatic Science Kingdom adalah sebuah server Discord dimana kita
       dapat mengobrol, menemukan teman baru, belajar bersama dan banyak hal di
@@ -29,90 +30,35 @@
         Youtube
       </a>
     </div>
+    <br>
+
   </div>
 </div>
-<div class="container-fluid bg-black">
-  <div class="row pb-3">
-    <div class="col-12 col-lg-6 text-white-50 text-center p-3 pe-lg-2">
-      <div class="p-3 rounded-4 bg-dark">
-        <h1 class="mb-2 fw-bold text-white reveal fade-left">About</h1>
-        <p class="reveal fade-left">
-          Intergalatic Science Kingdom adalah sebuah server Discord dimana kita
-          dapat mengobrol, menemukan teman baru, belajar bersama dan banyak hal
-          di server tersebut!
-        </p>
-        <p class="reveal fade-left">
-          Server ini diperuntukkan sebagai wadah interaksi, di mana kamu bisa
-          mengirimkan meme sains, fanart, ngobrol dengan Fajrul dan teman-teman
-          lain, serta berdiskusi untuk topik-topik tertentu.
-        </p>
-        <p class="reveal fade-left">
-          Server ini didirikan oleh
-          <a href="https://fajrul.blog/"
-            >Fajrul Falah, seorang seorang pendidik dan komunikator sains
-            Indonesia</a
-          >
-          dan kawan kawan pada 24 Juli 2021
-        </p>
-        <p class="reveal fade-left">
-          Selain itu, di server ini terdapat Roles dan channel yang menarik
-          serta event dan member yang aktif!
-        </p>
-      </div>
-    </div>
-    <div class="col-12 col-lg-6 p-3 text-center ps-lg-2">
-      <div class="bg-dark py-3 px-4 rounded-4">
-        <h1 class="fw-bold mb-3 text-white reveal fade-right">Leaderboard</h1>
-        <div class="container fs-3 fw-bold">
-          <div
-            class="row border border-dark bg-primary rounded-pill my-1 reveal fade-right"
-            style="color: gold"
-          >
-            <div class="col-2">1</div>
-            <div class="col-8"><%= leaderboard[0].tag %></div>
-            <div class="col-2"><%= leaderboard[0].level %></div>
-          </div>
-          <div
-            class="row border border-dark bg-primary rounded-pill my-1 reveal fade-right"
-            style="color: silver"
-          >
-            <div class="col-2">2</div>
-            <div class="col-8"><%= leaderboard[1].tag %></div>
-            <div class="col-2"><%= leaderboard[1].level %></div>
-          </div>
-          <div
-            class="row border border-dark bg-primary rounded-pill my-1 reveal fade-right"
-            style="color: brown"
-          >
-            <div class="col-2">3</div>
-            <div class="col-8"><%= leaderboard[2].tag %></div>
-            <div class="col-2"><%= leaderboard[2].level %></div>
-          </div>
-          <div
-            class="row border border-dark bg-primary rounded-pill my-1 reveal fade-right"
-            style="color: #eee"
-          >
-            <div class="col-2">4</div>
-            <div class="col-8"><%= leaderboard[3].tag %></div>
-            <div class="col-2"><%= leaderboard[3].level %></div>
-          </div>
-          <div
-            class="row border border-dark bg-primary rounded-pill my-1 reveal fade-right"
-            style="color: #eee"
-          >
-            <div class="col-2">5</div>
-            <div class="col-8"><%= leaderboard[4].tag %></div>
-            <div class="col-2"><%= leaderboard[4].level %></div>
-          </div>
-        </div>
-        <a
-          href="/leaderboard"
-          class="btn btn-outline-primary btn-lg px-4 py-1 mt-3 reveal fade-right"
-          >See More</a
-        >
-      </div>
-    </div>
-  </div>
+<div class="px-4 pb-5 text-center text-secondary bg-dark" style="--bs-bg-opacity: 75%;">
+  <br>
+  <h1 class="mb-2 fw-bold text-white reveal fade-left">About</h1>
+  <p class="reveal fade-left">
+    Intergalatic Science Kingdom adalah sebuah server Discord dimana kita
+    dapat mengobrol, menemukan teman baru, belajar bersama dan banyak hal
+    di server tersebut!
+  </p>
+  <p class="reveal fade-left">
+    Server ini diperuntukkan sebagai wadah interaksi, di mana kamu bisa
+    mengirimkan meme sains, fanart, ngobrol dengan Fajrul dan teman-teman
+    lain, serta berdiskusi untuk topik-topik tertentu.
+  </p>
+  <p class="reveal fade-left">
+    Server ini didirikan oleh
+    <a href="https://fajrul.blog/"
+      >Fajrul Falah, seorang seorang pendidik dan komunikator sains
+      Indonesia</a
+    >
+    dan kawan kawan pada 24 Juli 2021
+  </p>
+  <p class="reveal fade-left">
+    Selain itu, di server ini terdapat Roles dan channel yang menarik
+    serta event dan member yang aktif!
+  </p>
 </div>
 
 <%- include("partials/footer") %>
