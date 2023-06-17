@@ -63,6 +63,9 @@ app.get("/", function (req, res) {
 app.get("/rules", (req, res) => {
   res.render("rules", { title: "Rules" })
 })
+app.get("/staff", (req, res) => {
+  res.render("staff", { title: "Staff", levelingData  })
+})
 
 app.get("/info", (req, res) => {
   res.render("info", { title: "Information" })
