@@ -11,7 +11,7 @@ class SaranRouter {
     let err = "";
 
     this.#app.get("/", function (req, res) {
-      res.render("saran", { channelSaran, success ,err });
+      res.render("saran", { title: "Saran", channelSaran, success ,err });
       success = false;
       err = "";
     });
