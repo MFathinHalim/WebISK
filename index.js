@@ -26,23 +26,33 @@ const getChannelSaran = async () => {
   return channelSaran;
 };
 
-let levelingData;
+let levelingData, staffData;
 
-const refreshData = () => {
+const refreshStaffData = async () => {
+  const guild = await client.guilds.fetch(client.config.guildId);
+  client.config.staffRolesId.forEach(async (id) => {
+    const role = await guild.roles.fetch(id);
+    staffData.push(role);
+  });
+};
+
+const refreshLeaderboardData = () => {
   JSDOM.fromURL("https://lurkr.gg/levels/1054414599945998416")
     .then((dom) => {
-      levelingData = dom.window.document.querySelector("script#__NEXT_DATA__").textContent
-      levelingData = JSON.parse(levelingData)
-      levelingData = levelingData.props.pageProps
+      levelingData = dom.window.document.querySelector(
+        "script#__NEXT_DATA__"
+      ).textContent;
+      levelingData = JSON.parse(levelingData);
+      levelingData = levelingData.props.pageProps;
     })
     .catch((error) => {
       console.error("Error fetching HTML content:", error);
     });
 };
 
-refreshData();
+refreshLeaderboardData();
 
-setInterval(refreshData, 60000);
+setInterval(refreshLeaderboardData, 60000);
 
 const app = express();
 
@@ -57,19 +67,20 @@ app.use(
 );
 
 app.get("/", function (req, res) {
-  res.render("home", { title: "Home", leaderboard: levelingData.levels });
+  res.render("home", { title: "Home" });
 });
 
 app.get("/rules", (req, res) => {
-  res.render("rules", { title: "Rules" })
-})
+  res.render("rules", { title: "Rules" });
+});
+
 app.get("/staff", (req, res) => {
-  res.render("staff", { title: "Staff", levelingData  })
-})
+  res.render("staff", { title: "Staff", staffData });
+});
 
 app.get("/info", (req, res) => {
-  res.render("info", { title: "Information" })
-})
+  res.render("info", { title: "Information" });
+});
 
 app.get("/leaderboard", function (req, res) {
   res.render("leaderboard", { title: "Leaderboard", levelingData });
@@ -89,6 +100,10 @@ client
     const saranRouter = new SaranRouter(channelSaran).getRouter();
 
     app.use("/saran", saranRouter);
+
+    refreshStaffData();
+
+    setInterval(refreshStaffData, 1000 * 60 * 60 * 24);
 
     app.listen(port, () => {
       console.log(`App is running on port ${port}`);

@@ -7,20 +7,20 @@
 }
 
 .active.fade-bottom {
-  animation: fade-bottom 500ms ease-in;
+  animation: fade-bottom 750ms ease-in;
 }
 
 .active.fade-left {
-  animation: fade-left 500ms ease-in;
+  animation: fade-left 750ms ease-in;
 }
 
 .active.fade-right {
-  animation: fade-right 500ms ease-in;
+  animation: fade-right 750ms ease-in;
 }
 
 @keyframes fade-bottom {
   0% {
-    transform: translateY(50px);
+    transform: translateY(200px);
     opacity: 0;
   }
   100% {
@@ -31,7 +31,7 @@
 
 @keyframes fade-left {
   0% {
-    transform: translateX(-100px);
+    transform: translateX(-200px);
     opacity: 0;
   }
   100% {
@@ -42,7 +42,7 @@
 
 @keyframes fade-right {
   0% {
-    transform: translateX(100px);
+    transform: translateX(200px);
     opacity: 0;
   }
   100% {
