@@ -2,7 +2,7 @@
 
 <div class="bg-dark mt-auto rounded-4 mx-4 p-3 text-light bg-opacity-75 text-center">
   <h1 class="fw-bold text-white">Saran</h1>
-  <% if (err.startsWith("no channel")) { %>
+  <% if (err.startsWith("no webhook")) { %>
     <div class="alert alert-danger my-2 alert-dismissible fade show" role="alert">
       Channel discord untuk mengirim saran <%= err.split(" ")[err.split(" ").length - 1] %> tidak ditemukan
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -12,20 +12,30 @@
       Tidak dapat mengirim saran ke discord
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+  <% } else if (err == "saran kosong") { %>
+    <div class="alert alert-danger my-2 alert-dismissible fade show" role="alert">
+      Saran tidak boleh kosong
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% } else if (err == "jenis kosong") { %>
+    <div class="alert alert-danger my-2 alert-dismissible fade show" role="alert">
+      Pilih jenis saran terlebih dahulu
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     <% } else if (success == true) { %>
     <div class="alert alert-success my-2 alert-dismissible fade show" role="alert">
       Saran berhasil dikirim
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   <% } %>
-  <form>
+  <form method="post" action="/saran">
     <div class="form-group my-3">
       <label for="jenis" class="text-start">Jenis Saran</label>
       <select class="form-control" name="jenis" id="jenis">
-        <option selected disabled>Pilih Jenis Saran</option>
-        <option value="discord" <%= channelSaran.saranDiscord ? null : "disabled" %>>Saran Discord</option>
-        <option value="youtube" <%= channelSaran.saranYoutube ? null : "disabled" %>>Saran Youtube</option>
-        <option value="website" <%= channelSaran.saranWebsite ? null : "disabled" %>>Saran Website</option>
+        <option selected disabled hidden>Pilih Jenis Saran</option>
+        <option value="discord" <%= webhookSaran.saranDiscord ? null : "disabled" %>>Saran Discord</option>
+        <option value="youtube" <%= webhookSaran.saranYoutube ? null : "disabled" %>>Saran Youtube</option>
+        <option value="website" <%= webhookSaran.saranWebsite ? null : "disabled" %>>Saran Website</option>
       </select>
     </div>
     <div class="form-group my-3">

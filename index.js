@@ -6,35 +6,7 @@ require("dotenv").config();
 
 const { JSDOM } = require("jsdom");
 
-const { Client } = require("discord.js");
-const client = new Client({ intents: 131071 });
-
-client.config = require("./config.json");
-
-const getChannelSaran = async () => {
-  const channelSaran = {
-    saranDiscord: await client.channels.fetch(
-      client.config.discordChannelId.saranDiscord
-    ),
-    saranYoutube: await client.channels.fetch(
-      client.config.discordChannelId.saranYoutube
-    ),
-    saranWebsite: await client.channels.fetch(
-      client.config.discordChannelId.saranWebsite
-    ),
-  };
-  return channelSaran;
-};
-
-let levelingData, staffData;
-
-const refreshStaffData = async () => {
-  const guild = await client.guilds.fetch(client.config.guildId);
-  client.config.staffRolesId.forEach(async (id) => {
-    const role = await guild.roles.fetch(id);
-    staffData.push(role);
-  });
-};
+let levelingData;
 
 const refreshLeaderboardData = () => {
   JSDOM.fromURL("https://lurkr.gg/levels/1054414599945998416")
@@ -66,16 +38,16 @@ app.use(
   })
 );
 
+const saranRouter = require("./routes/saran.js");
+
+app.use("/saran", saranRouter);
+
 app.get("/", function (req, res) {
   res.render("home", { title: "Home" });
 });
 
 app.get("/rules", (req, res) => {
   res.render("rules", { title: "Rules" });
-});
-
-app.get("/staff", (req, res) => {
-  res.render("staff", { title: "Staff", staffData });
 });
 
 app.get("/info", (req, res) => {
@@ -88,32 +60,35 @@ app.get("/leaderboard", function (req, res) {
 
 const port = 8080;
 
-client
-  .login(process.env.DISCORDBOTTOKEN)
-  .then(async () => {
-    console.log(`Logged in as ${client.user.tag}`);
+app.listen(port, () => {
+  console.log(`App is running on port ${port}`);
+});
+// client
+//   .login(process.env.DISCORDBOTTOKEN)
+//   .then(async () => {
+//     console.log(`Logged in as ${client.user.tag}`);
 
-    const channelSaran = await getChannelSaran();
+//     const channelSaran = await getChannelSaran();
 
-    const SaranRouter = require("./routes/Saran.js");
+//     const SaranRouter = require("./routes/Saran.js");
 
-    const saranRouter = new SaranRouter(channelSaran).getRouter();
+//     const saranRouter = new SaranRouter(channelSaran).getRouter();
 
-    app.use("/saran", saranRouter);
+//     app.use("/saran", saranRouter);
 
-    refreshStaffData();
+//     refreshStaffData();
 
-    setInterval(refreshStaffData, 1000 * 60 * 60 * 24);
+//     setInterval(refreshStaffData, 1000 * 60 * 60 * 24);
 
-    app.listen(port, () => {
-      console.log(`App is running on port ${port}`);
-    });
-  })
-  .catch((err) => {
-    console.error("Cannot login to discord", err);
-    console.log("Disable /saran");
+//     app.listen(port, () => {
+//       console.log(`App is running on port ${port}`);
+//     });
+//   })
+//   .catch((err) => {
+//     console.error("Cannot login to discord", err);
+//     console.log("Disable /saran");
 
-    app.listen(port, () => {
-      console.log(`App is running on port ${port}`);
-    });
-  });
+//     app.listen(port, () => {
+//       console.log(`App is running on port ${port}`);
+//     });
+//   });
