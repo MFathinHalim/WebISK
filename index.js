@@ -37,7 +37,6 @@ app.use(
     extended: true,
   })
 );
-
 const saranRouter = require("./routes/saran.js");
 
 app.use("/saran", saranRouter);
@@ -63,32 +62,3 @@ const port = 8080;
 app.listen(port, () => {
   console.log(`App is running on port ${port}`);
 });
-// client
-//   .login(process.env.DISCORDBOTTOKEN)
-//   .then(async () => {
-//     console.log(`Logged in as ${client.user.tag}`);
-
-//     const channelSaran = await getChannelSaran();
-
-//     const SaranRouter = require("./routes/Saran.js");
-
-//     const saranRouter = new SaranRouter(channelSaran).getRouter();
-
-//     app.use("/saran", saranRouter);
-
-//     refreshStaffData();
-
-//     setInterval(refreshStaffData, 1000 * 60 * 60 * 24);
-
-//     app.listen(port, () => {
-//       console.log(`App is running on port ${port}`);
-//     });
-//   })
-//   .catch((err) => {
-//     console.error("Cannot login to discord", err);
-//     console.log("Disable /saran");
-
-//     app.listen(port, () => {
-//       console.log(`App is running on port ${port}`);
-//     });
-//   });
