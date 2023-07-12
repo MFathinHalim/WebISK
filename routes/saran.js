@@ -1,5 +1,6 @@
 const { WebhookClient } = require("discord.js");
 const express = require("express");
+const { rateLimit } = require("express-rate-limit");
 
 const app = express.Router();
 
@@ -54,8 +55,20 @@ function postCtrl(req, res, next) {
       next();
     });
 }
+
+const sendSuggestLimiter = rateLimit({
+	windowMs: 60 * 60 * 1000, // 1 hour
+	max: 1, // Limit each IP to 1 suggest per `window` (here, per hour)
+  handler(req, res) {
+    req.err = "limit"
+    return homeCtrl(req, res)
+  },
+	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+})
+
 app.get("/", homeCtrl);
 
-app.post("/", postCtrl, homeCtrl);
+app.post("/", sendSuggestLimiter, postCtrl, homeCtrl);
 
 module.exports = app;
