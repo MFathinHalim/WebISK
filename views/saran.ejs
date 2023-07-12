@@ -22,11 +22,19 @@
       Pilih jenis saran terlebih dahulu
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+<<<<<<< HEAD
     <% } else if (err == "Spam") { %>
       <div class="alert alert-danger my-2 alert-dismissible fade show" role="alert">
         Dimohon Jangan Spam Saran
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
+=======
+  <% } else if (err == "limit") { %>
+    <div class="alert alert-danger my-2 alert-dismissible fade show" role="alert">
+      Hanya bisa mengirim 1 saran setiap jam
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+>>>>>>> 14fe2f3eb4e50a2dc0b10bae92b659601f7cadc7
     <% } else if (success == true) { %>
     <div class="alert alert-success my-2 alert-dismissible fade show" role="alert">
       Saran berhasil dikirim
@@ -61,4 +69,8 @@
   </form>
 </div>
 
+<<<<<<< HEAD
 <%- include("partials/footer") %>
+=======
+<%- include("partials/footer") %>
+>>>>>>> 14fe2f3eb4e50a2dc0b10bae92b659601f7cadc7

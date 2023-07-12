@@ -3,10 +3,10 @@
 <div class="container-fluid text-center my-3">
   <div class="row px-2">
     <div class="col-12 col-lg-8">
-      <div class="bg-dark pt-3 pb-1 rounded-4 mb-2 mb-lg-0" style="--bs-bg-opacity: 75%;">
+      <div class="bg-dark bg-opacity-75 pt-3 pb-1 rounded-4 mb-2 mb-lg-0">
         <h1 class="text-white fw-bold mb-3">Leaderboard</h1>
         <div class="overflow-x-scroll px-3 mx-2" >
-          <table class="table table-dark fs-4 align-middle" style="opacity: 75%;">
+          <table class="table table-dark fs-4 align-middle opacity-75">
             <thead>
               <tr>
                 <th class="px-3" scope="col">Rank</th>
@@ -16,7 +16,7 @@
                 <th class="px-3" scope="col">Level</th>
               </tr>
             </thead>
-            <tbody style="--bs-bg-opacity: 75%;">
+            <tbody>
               <% levelingData.levels.forEach((user, i) => { %>
               <tr>
                 <td class="px-3"><%= i + 1 %></td>
@@ -44,7 +44,7 @@
       <div class="row">
         <div class="col-12 col-md-6 col-lg-12" id="multiplier">
           <div
-            class="card mt-2 mt-lg-0 mb-0 mb-md-2 mb-lg-3 bg-dark text-white rounded-4" style="--bs-bg-opacity: 75%;"
+            class="card mt-2 mt-lg-0 mb-0 mb-md-2 mb-lg-3 bg-dark text-white rounded-4 bg-opacity-75"
           >
             <div class="card-body">
               <h1 class="card-title mb-3">Multipliers</h1>
@@ -111,7 +111,7 @@
           </div>
         </div>
         <div class="col-12 col-md-6 col-lg-12" id="role">
-          <div class="card mt-3 mt-md-2 bg-dark text-white rounded-4" style="--bs-bg-opacity: 75%;">
+          <div class="card mt-3 mt-md-2 bg-dark text-white rounded-4 bg-opacity-75">
             <div class="card-body">
               <h1 class="card-title mb-3">Role Rewards</h1>
               <div class="card-text fs-5">

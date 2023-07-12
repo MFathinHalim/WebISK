@@ -60,7 +60,11 @@ const sendSuggestLimiter = rateLimit({
 	windowMs: 60 * 60 * 1000, // 1 hour
 	max: 1, // Limit each IP to 1 suggest per `window` (here, per hour)
   handler(req, res) {
+<<<<<<< HEAD
     req.err = "Spam"
+=======
+    req.err = "limit"
+>>>>>>> 14fe2f3eb4e50a2dc0b10bae92b659601f7cadc7
     return homeCtrl(req, res)
   },
 	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
@@ -71,4 +75,8 @@ app.get("/", homeCtrl);
 
 app.post("/", sendSuggestLimiter, postCtrl, homeCtrl);
 
+<<<<<<< HEAD
 module.exports = app;
+=======
+module.exports = app;
+>>>>>>> 14fe2f3eb4e50a2dc0b10bae92b659601f7cadc7
