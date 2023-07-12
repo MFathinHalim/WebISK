@@ -1,162 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include("partials/header") %>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About</title>
-  <link rel="icon" type="image/gif" href="img/LogoISK.gif">
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-</head>
-<header class="bg-dark " style=" margin-bottom: 10px; padding: 0px; position: sticky; position: -webkit-sticky; z-index: 1; width: inherit;
-  top: 0;">
-  <nav class="bg-dark navbar navbar-expand-lg text-white ">
-    <div class="container-fluid">
-      <img src="img/LogoISK.gif" alt="Logo" width="30" height="30" style="margin-right: 10px;"
-        class="d-inline-block align-text-top">
-        <a style="margin-right: 10px;" href="https://webisk.mfathinhalim.repl.co/">Intergalatic Science Kingdom</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon navbar-dark"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="border border-success btn btn-success nav-link text-white" style="margin-right: 10px;"
-              href="https://discord.gg/fajrulfx">Join Now!</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Go To
-            </a>
-            <ul class="dropdown-menu bg-dark">
-              <li><a class="dropdown-item text-white dr" href="#Rules">Rules</a></li>
-              <li><a class="dropdown-item text-white" href="#Roles">Roles</a></li>
-              <li><a class="dropdown-item text-white" href="#Channel">Channel</a></li>
-              <li>
-                <a class="dropdown-item text-white mb-0"
-                  href="https://intergalacticsciencekingdom-lightmode.danurwendafaran.repl.co/">Light Mode</a>
-              </li>
-              <li>
-                <a class="dropdown-item text-white mb-0"
-                  href="https://intergalacticsciencekingdom.mfathinhalim.repl.co/english.html">English Language</a>
-              </li>
-              <li>
-                <hr class="dropdown-divider text-white border-white">
-              </li>
-              <li>
-                <a class="dropdown-item text-white" href="/leaderboard">ISK Leaderboard
-                </a>
-              </li>
-              <li><a class="border border-success dropdown-item text-white " href="#https://discord.gg/fajrulfx">Join
-                  Now!</a></li>
-
-          </li>
-
-
-      </div>
+<div class="bg-dark mt-auto rounded-4 mx-4 p-3 text-light bg-opacity-75 text-center">
+  <h1 class="fw-bold text-white">Saran</h1>
+  <% if (err.startsWith("no webhook")) { %>
+    <div class="alert alert-danger my-2 alert-dismissible fade show" role="alert">
+      Channel discord untuk mengirim saran <%= err.split(" ")[err.split(" ").length - 1] %> tidak ditemukan
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-  </nav>
-
-</header>
-<style>
-  li {
-    text-decoration: none;
-    margin-left: 0;
-    list-style-type: none;
-  }
-
-  ul {
-    list-style-type: none;
-    margin: 0;
-  }
-
-  a {
-    color: deepskyblue;
-    text-decoration: none;
-  }
-</style>
-<style>
-
-  body {
-    overflow: hidden;
-  }
-  
-    .custom-container {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  
-    .custom-card {
-
-      padding: 20px;
-      border-radius: 10px;
-    }
-
-  
-
-  .custom-container {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-
-</style>
-
-<body style=" margin: 10px; background-color: #35393e;">
-  <div class="custom-container">
-    <div class="custom-card bg-dark <%= !( channelSaran.saranDiscord || channelSaran.saranYoutube || channelSaran.saranWebsite ) ? 'd-none' : null %>">
-      <h5 class="card-title text-white text-center">Submit Feedback</h5>
-      <% if (err.startsWith("no channel")) { %>
-        <div class="alert alert-danger my-2 alert-dismissible fade show" role="alert">
-          Channel discord untuk mengirim saran <%= err.split(" ")[err.split(" ").length - 1] %> tidak ditemukan
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-      <% } else if (err == "cannot send") { %>
-        <div class="alert alert-danger my-2 alert-dismissible fade show" role="alert">
-          Tidak dapat mengirim saran ke discord
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <% } else if (success == true) { %>
-        <div class="alert alert-success my-2 alert-dismissible fade show" role="alert">
-          Saran berhasil dikirim
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-      <% } %>
-      <form action="/saran/post" method="post" class="text-center">
-        <div class="mb-3">
-          <label for="jenis" class="form-label text-white">Select Type:</label>
-          <select class="form-select" name="jenis" id="jenis" required>
-            <option value="discord" <%= channelSaran.saranDiscord ? null : "disabled" %>>Saran Discord</option>
-            <option value="youtube" <%= channelSaran.saranYoutube ? null : "disabled" %>>Saran Youtube</option>
-            <option value="website" <%= channelSaran.saranWebsite ? null : "disabled" %>>Saran Website</option>
-          </select>
-        </div>
-        <div class="mb-3">
-            <label for="nama" class="form-label text-white">Name:</label>
-            <input type="text" name="nama" id="nama">
-          </div>
-        <div class="mb-3">
-          <label for="saran" class="form-label text-white">Your Feedback:</label>
-          <textarea class="form-control" rows="6" cols="30" placeholder="Tulis Yang Anda Pikirkan!" name="saran" id="saran" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+  <% } else if (err == "cannot send") { %>
+    <div class="alert alert-danger my-2 alert-dismissible fade show" role="alert">
+      Tidak dapat mengirim saran ke discord
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-      <div class="custom-card text-white bg-dark <%= ( channelSaran.saranDiscord || channelSaran.saranYoutube || channelSaran.saranWebsite ) ? 'd-none' : null %>">
-        gaada saran2 balik ke <a href="/">home</a> sana
+  <% } else if (err == "saran kosong") { %>
+    <div class="alert alert-danger my-2 alert-dismissible fade show" role="alert">
+      Saran tidak boleh kosong
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% } else if (err == "jenis kosong") { %>
+    <div class="alert alert-danger my-2 alert-dismissible fade show" role="alert">
+      Pilih jenis saran terlebih dahulu
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <% } else if (err == "Spam") { %>
+      <div class="alert alert-danger my-2 alert-dismissible fade show" role="alert">
+        Dimohon Jangan Spam Saran
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
-  </div>
-</body>
+    <% } else if (success == true) { %>
+    <div class="alert alert-success my-2 alert-dismissible fade show" role="alert">
+      Saran berhasil dikirim
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% } %>
+  <form method="post" action="/saran">
+    <div class="form-group my-3">
+      <label for="jenis" class="text-start">Jenis Saran</label>
+      <select class="form-control" name="jenis" id="jenis">
+        <option selected disabled hidden>Pilih Jenis Saran</option>
+        <option value="discord" <%= webhookSaran.saranDiscord ? null : "disabled" %>>Saran Discord</option>
+        <option value="youtube" <%= webhookSaran.saranYoutube ? null : "disabled" %>>Saran Youtube</option>
+        <option value="website" <%= webhookSaran.saranWebsite ? null : "disabled" %>>Saran Website</option>
+      </select>
+    </div>
+    <div class="form-group my-3">
+      <label for="nama" class="text-start">Nama</label>
+      <input
+        type="text"
+        class="form-control"
+        name="nama"
+        id="nama"
+        placeholder="Optional"
+      />
+    </div>
+    <div class="form-group my-3">
+      <label for="saran" class="text-start">Saran</label>
+      <textarea class="form-control" name="saran" id="saran" rows="3" placeholder="Ketik saran anda disini..."></textarea>
+    </div>
+    <button type="submit" class="btn btn-outline-light">Kirim</button>
+  </form>
+</div>
 
-
-
-<script src="js/bootstrap.bundle.min.js"></script>
-
-</html>
+<%- include("partials/footer") %>
