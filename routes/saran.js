@@ -5,9 +5,9 @@ const { rateLimit } = require("express-rate-limit");
 const app = express.Router();
 
 const webhookSaran = {
-  saranDiscord: new WebhookClient({ url: process.env.WEBHOOK_SARAN_DISCORD }),
-  saranYoutube: new WebhookClient({ url: process.env.WEBHOOK_SARAN_YOUTUBE }),
-  saranWebsite: new WebhookClient({ url: process.env.WEBHOOK_SARAN_WEBSITE }),
+  saranDiscord: process.env.WEBHOOK_SARAN_DISCORD ? new WebhookClient({ url: process.env.WEBHOOK_SARAN_DISCORD }) : null,
+  saranYoutube: process.env.WEBHOOK_SARAN_YOUTUBE ? new WebhookClient({ url: process.env.WEBHOOK_SARAN_YOUTUBE }) : null,
+  saranWebsite: process.env.WEBHOOK_SARAN_WEBSITE ? new WebhookClient({ url: process.env.WEBHOOK_SARAN_WEBSITE }) : null,
 };
 
 function homeCtrl(req, res) {
@@ -20,36 +20,8 @@ function homeCtrl(req, res) {
 }
 
 function postCtrl(req, res, next) {
-  const jenis = req.body.jenis;
-  const name = req.body.nama || "Seseorang";
-  const saran = req.body.saran;
-
-  if (!jenis) {
-    req.err = "jenis kosong";
-    return next();
-  }
-
-  const webhook =
-    jenis == "discord"
-      ? webhookSaran.saranDiscord
-      : jenis == "youtube"
-      ? webhookSaran.saranYoutube
-      : jenis == "website"
-      ? webhookSaran.saranWebsite
-      : undefined;
-
-  if (!webhook) {
-    req.err = `no webhook ${jenis}`;
-    return next();
-  }
-
-  if (!saran) {
-    req.err = "saran kosong";
-    return next();
-  }
-
-  webhook
-    .send({ username: name, content: saran })
+  req.webhook
+    .send({ username: req.name, content: req.saran })
     .then(() => {
       req.success = true;
       next();
@@ -97,10 +69,31 @@ const sendWebsiteSuggestLimiter = rateLimit({
 app.get("/", homeCtrl);
 
 app.post("/", (req, res, next) => {
-  const jenis = req.body.jenis;
+  const jenis = req.body.jenis
+  req.name = req.body.nama.trim() || "Seseorang"
+  req.saran = req.body.saran.trim()
 
   if (!jenis) {
     req.err = "jenis kosong";
+    return homeCtrl(req, res);
+  }
+
+  req.webhook =
+    jenis == "discord"
+      ? webhookSaran.saranDiscord
+      : jenis == "youtube"
+      ? webhookSaran.saranYoutube
+      : jenis == "website"
+      ? webhookSaran.saranWebsite
+      : undefined;
+
+  if (!req.webhook) {
+    req.err = `no webhook ${jenis}`;
+    return homeCtrl(req, res);
+  }
+
+  if (!req.saran) {
+    req.err = "saran kosong";
     return homeCtrl(req, res);
   }
 
