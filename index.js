@@ -1,6 +1,7 @@
 const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
+const requestIp = require("request-ip")
 
 require("dotenv").config();
 
@@ -37,6 +38,7 @@ app.use(
     extended: true,
   })
 );
+app.use(requestIp.mw())
 
 const saranRouter = require("./routes/saran.js")
 
