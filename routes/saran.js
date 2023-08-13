@@ -42,6 +42,9 @@ const sendDiscordSuggestLimiter = rateLimit({
   },
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+  keyGenerator(req, res) {
+    return req.clientIp
+  }
 });
 
 const sendYoutubeSuggestLimiter = rateLimit({
@@ -53,6 +56,9 @@ const sendYoutubeSuggestLimiter = rateLimit({
   },
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+  keyGenerator(req, res) {
+    return req.clientIp
+  }
 });
 
 const sendWebsiteSuggestLimiter = rateLimit({
@@ -64,6 +70,9 @@ const sendWebsiteSuggestLimiter = rateLimit({
   },
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+  keyGenerator(req, res) {
+    return req.clientIp
+  }
 });
 
 app.get("/", homeCtrl);
