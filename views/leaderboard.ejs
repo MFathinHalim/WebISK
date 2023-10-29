@@ -2,10 +2,10 @@
 
 <div class="container-fluid max-1200 mx-auto text-center my-3">
   <div class="row px-2">
-    <div class="col-12 col-lg-8">
+    <div class="col-12 col-lg-8 h-100" id="leaderboard">
       <div class="bg-dark bg-opacity-75 pt-3 pb-1 rounded-4 mb-2 mb-lg-0">
         <h1 class="text-white fw-bold mb-3">Leaderboard</h1>
-        <div class="overflow-x-scroll px-3 mx-2" >
+        <div class="overflow-scroll px-3 mx-2">
           <table class="table table-dark fs-4 align-middle opacity-75">
             <thead>
               <tr>
@@ -29,7 +29,7 @@
                     onerror="this.onerror=null; this.src='https://cdn.discordapp.com/embed/avatars/1.png'"
                   />
                 </td>
-                <td class="px-3"><%= user.tag %></td>
+                <td class="px-3"><%= user.username + (user.discriminator !== "0" ? `#${user.discriminator}` : "") %></td>
                 <td class="px-3"><%= user.xp %></td>
                 <td class="px-3"><%= user.messageCount %></td>
                 <td class="px-3"><%= user.level %></td>
@@ -40,7 +40,7 @@
         </div>
       </div>
     </div>
-    <div class="col-12 col-lg-4">
+    <div class="col-12 col-lg-4 h-100" id="col-lb-2">
       <div class="row">
         <div class="col-12 col-md-6 col-lg-12" id="multiplier">
           <div
@@ -134,5 +134,10 @@
     </div>
   </div>
 </div>
+
+<script>
+  const height = document.getElementById('role').getBoundingClientRect().bottom - document.getElementById("multiplier").getBoundingClientRect().top
+  document.getElementById('leaderboard').setAttribute("style", `max-height: ${height}px !important; overflow-y: scroll`)
+</script>
 
 <%- include("partials/footer") %>
