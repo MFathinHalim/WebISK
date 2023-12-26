@@ -8,88 +8,168 @@
     <link rel="icon" type="image/gif" href="image/LogoISK.gif" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/reveal.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Karla"
+      rel="stylesheet" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+      rel="stylesheet" />
+    <!-- Option 1: Include in HTML -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css" />
   </head>
+  <style>
+    a {
+      text-decoration: none;
+      color: cornflowerblue;
+    }
+    .reveal {
+      opacity: 0;
+    }
 
-  <body class="bg-dark bg-opacity-75 d-flex flex-column h-100" style="background: url('image/bg.jpg');background-position: center;
-  background-repeat: no-repeat;
+    .reveal.active {
+      opacity: 1;
+    }
 
-  background-attachment: fixed;
-  background-size: cover; ">
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-black">
-      <div class="container-fluid">
-        <a class="navbar-brand fw-bold" href="/"
-          >Intergalactic Science Kingdom</a
-        >
+    .active.fade-bottom {
+      animation: fade-bottom 750ms ease-in;
+    }
+
+    .active.fade-left {
+      animation: fade-left 750ms ease-in;
+    }
+
+    .active.fade-right {
+      animation: fade-right 750ms ease-in;
+    }
+
+    @keyframes fade-bottom {
+      0% {
+        transform: translateY(200px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fade-left {
+      0% {
+        transform: translateX(-200px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fade-right {
+      0% {
+        transform: translateX(200px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    @media (min-width: 1200px) {
+      .max-1200 {
+        max-width: 1200px;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+    }
+    .bg-dark {
+      background-color: #101010 !important;
+    }
+
+    .navbar-dark {
+      /* From https://css.glass */
+      background: rgba(16, 16, 16, 0.24) !important;
+      backdrop-filter: blur(5px) !important;
+      -webkit-backdrop-filter: blur(5px) !important;
+    }
+
+    .btn-primary {
+      background: #5865f2;
+    }
+    .btn-danger {
+      background-color: #f00;
+    }
+    .btn-primary:hover {
+      background: #5865f2 !important;
+    }
+    .btn-danger:hover {
+      background-color: #f00 !important;
+    }
+
+    body {
+      font-family: "Karla";
+    }
+    .card {
+      background-color: rgb(38, 38, 38) !important;
+      border-style: groove;
+      border-color: rgb(73, 73, 73);
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+
+  <body class="bg-dark d-flex flex-column">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-dark">
+      <div class="row w-100 mx-lg-0">
+        <a
+          class="navbar-brand col-lg-4 col-auto ms-2 mx-lg-0 fw-bold text-truncate"
+          href="/">
+          ISK
+        </a>
+
         <button
-          class="navbar-toggler"
+          class="navbar-toggler ms-auto col-auto border-0"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+          aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div
+          class="collapse navbar-collapse col-lg-8 ms-2 ps-lg-0 mx-lg-0"
+          id="navbarSupportedContent">
+          <ul
+            class="navbar-nav mb-2 mb-lg-0 col-auto col-lg-6 justify-content-center">
             <li class="nav-item">
-              <a
-                class="nav-link <%= title == 'Home' ? 'active' : null %>"
-                href="/"
-                >Home</a
-              >
+              <a class="nav-link" href="/info">Info</a>
             </li>
             <li class="nav-item">
-              <a
-                class="nav-link <%= title == 'Staff' ? 'active' : null %>"
-                href="/staff"
-                >Staff</a
-              >
+              <a class="nav-link" href="/leaderboard">Leaderboard</a>
             </li>
             <li class="nav-item">
-              <a
-                class="nav-link <%= title == 'Rules' ? 'active' : null %>"
-                href="/rules"
-                >Rules</a
-              >
+              <a class="nav-link" href="https://blog.sciencekingdom.gg/">
+                Blog
+              </a>
             </li>
-            <li class="nav-item">
-              <a
-                class="nav-link <%= title == 'Information' ? 'active' : null %>"
-                href="/info"
-                >Info</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link <%= title == 'Leaderboard' ? 'active' : null %>"
-                href="/leaderboard"
-                >Leaderboard</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link <%= title == 'Saran' ? 'active' : null %>"
-                href="/saran"
-                >Saran</a
-              >
-            </li>
-<<<<<<< HEAD
-            <!--li class="nav-item">
-              <a
-                class="nav-link <%= title == 'Staff' ? 'active' : null %>"
-                href="/staff"
-                >List Staff ISK</a
-              >
-            </li-->
-=======
->>>>>>> 14fe2f3eb4e50a2dc0b10bae92b659601f7cadc7
           </ul>
-          <a href="https://discord.gg/fajrulfx" class="btn btn-outline-primary"
-            >Discord</a
-          >
+          <a
+            href="https://discord.gg/fajrulfx"
+            class="ms-auto btn btn-outline-light rounded-circle border-0">
+            <i class="bi bi-discord"></i>
+          </a>
+          <a
+            href="https://youtube.com/@FajrulFx"
+            class="ms btn btn-outline-light rounded-circle border-0">
+            <i class="bi bi-youtube"></i>
+          </a>
         </div>
       </div>
     </nav>
-
+  </body>
+</html>

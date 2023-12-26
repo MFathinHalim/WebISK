@@ -1,76 +1,63 @@
 <%- include("partials/header") %>
 
-<div class="bg-dark mt-auto rounded-4 mx-4 p-3 text-light bg-opacity-75 text-center">
-  <h1 class="fw-bold text-white">Saran</h1>
-  <% if (err.startsWith("no webhook")) { %>
-    <div class="alert alert-danger my-2 alert-dismissible fade show" role="alert">
-      Channel discord untuk mengirim saran <%= err.split(" ")[err.split(" ").length - 1] %> tidak ditemukan
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  <% } else if (err == "cannot send") { %>
-    <div class="alert alert-danger my-2 alert-dismissible fade show" role="alert">
-      Tidak dapat mengirim saran ke discord
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  <% } else if (err == "saran kosong") { %>
-    <div class="alert alert-danger my-2 alert-dismissible fade show" role="alert">
-      Saran tidak boleh kosong
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  <% } else if (err == "jenis kosong") { %>
-    <div class="alert alert-danger my-2 alert-dismissible fade show" role="alert">
-      Pilih jenis saran terlebih dahulu
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-<<<<<<< HEAD
-    <% } else if (err == "Spam") { %>
-      <div class="alert alert-danger my-2 alert-dismissible fade show" role="alert">
+<div class="card bg-dark text-light mx-auto my-auto my-4 justify-content-center align-items-center" style="max-width: 800px;">
+  <div class="card-header bg-transparent">
+    <h1 class="card-title text-center fw-bold text-white">Saran</h1>
+  </div>
+  <div class="card-body">
+    <% if (err && err.webhookNotFound) { %>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        Channel discord untuk mengirim saran <%= err.webhookNotFound %> tidak ditemukan
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% } else if (err && err.cannotSend) { %>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        Tidak dapat mengirim saran ke discord
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% } else if (err && err.emptySaran) { %>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        Saran tidak boleh kosong
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% } else if (err && err.emptyJenis) { %>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        Pilih jenis saran terlebih dahulu
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% } else if (err && err.spam) { %>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
         Dimohon Jangan Spam Saran
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
-=======
-  <% } else if (err == "limit") { %>
-    <div class="alert alert-danger my-2 alert-dismissible fade show" role="alert">
-      Hanya bisa mengirim 1 saran setiap jam
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
->>>>>>> 14fe2f3eb4e50a2dc0b10bae92b659601f7cadc7
-    <% } else if (success == true) { %>
-    <div class="alert alert-success my-2 alert-dismissible fade show" role="alert">
-      Saran berhasil dikirim
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  <% } %>
-  <form method="post" action="/saran">
-    <div class="form-group my-3">
-      <label for="jenis" class="text-start">Jenis Saran</label>
-      <select class="form-control" name="jenis" id="jenis">
-        <option selected disabled hidden>Pilih Jenis Saran</option>
-        <option value="discord" <%= webhookSaran.saranDiscord ? null : "disabled" %>>Saran Discord</option>
-        <option value="youtube" <%= webhookSaran.saranYoutube ? null : "disabled" %>>Saran Youtube</option>
-        <option value="website" <%= webhookSaran.saranWebsite ? null : "disabled" %>>Saran Website</option>
-      </select>
-    </div>
-    <div class="form-group my-3">
-      <label for="nama" class="text-start">Nama</label>
-      <input
-        type="text"
-        class="form-control"
-        name="nama"
-        id="nama"
-        placeholder="Optional"
-      />
-    </div>
-    <div class="form-group my-3">
-      <label for="saran" class="text-start">Saran</label>
-      <textarea class="form-control" name="saran" id="saran" rows="3" placeholder="Ketik saran anda disini..."></textarea>
-    </div>
-    <button type="submit" class="btn btn-outline-light">Kirim</button>
-  </form>
+    <% } else if (success) { %>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Saran berhasil dikirim
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% } %>
+    <form method="post" action="/saran">
+      <div class="mb-3">
+        <label for="jenis" class="form-label">Jenis Saran</label>
+        <select class="form-select" name="jenis" id="jenis">
+          <option selected disabled hidden>Pilih Jenis Saran</option>
+          <option value="discord" <%= webhookSaran.saranDiscord ? null : "disabled" %>>Saran Discord</option>
+          <option value="youtube" <%= webhookSaran.saranYoutube ? null : "disabled" %>>Saran Youtube</option>
+          <option value="website" <%= webhookSaran.saranWebsite ? null : "disabled" %>>Saran Website</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="nama" class="form-label">Nama</label>
+        <input type="text" class="form-control" name="nama" id="nama" placeholder="Optional">
+      </div>
+      <div class="mb-3">
+        <label for="saran" class="form-label">Saran</label>
+        <textarea class="form-control" name="saran" id="saran" rows="3" placeholder="Ketik saran anda disini..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Kirim</button>
+    </form>
+  </div>
 </div>
 
-<<<<<<< HEAD
+
 <%- include("partials/footer") %>
-=======
-<%- include("partials/footer") %>
->>>>>>> 14fe2f3eb4e50a2dc0b10bae92b659601f7cadc7

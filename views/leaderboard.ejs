@@ -1,11 +1,11 @@
 <%- include("partials/header") %>
 
 <div class="container-fluid text-center my-3">
-  <div class="row px-2">
+  <div class="row p-3">
     <div class="col-12 col-lg-8">
-      <div class="bg-dark bg-opacity-75 pt-3 pb-1 rounded-4 mb-2 mb-lg-0">
+      <div class="card pt-3 pb-1 rounded-4 mb-2 mb-lg-0">
         <h1 class="text-white fw-bold mb-3">Leaderboard</h1>
-        <div class="overflow-x-scroll px-3 mx-2" >
+        <div class="table-responsive-md px-3 mx-2">
           <table class="table table-dark fs-4 align-middle opacity-75">
             <thead>
               <tr>
@@ -26,8 +26,7 @@
                     alt="<%= user.tag %> avatar"
                     class="rounded-circle border"
                     width="64"
-                    onerror="this.onerror=null; this.src='https://cdn.discordapp.com/embed/avatars/1.png'"
-                  />
+                    onerror="this.onerror=null; this.src='https://cdn.discordapp.com/embed/avatars/1.png'" />
                 </td>
                 <td class="px-3"><%= user.tag %></td>
                 <td class="px-3"><%= user.xp %></td>
@@ -44,8 +43,7 @@
       <div class="row">
         <div class="col-12 col-md-6 col-lg-12" id="multiplier">
           <div
-            class="card mt-2 mt-lg-0 mb-0 mb-md-2 mb-lg-3 bg-dark text-white rounded-4 bg-opacity-75"
-          >
+            class="card mt-2 mt-lg-0 mb-0 mb-md-2 mb-lg-3 bg-dark text-white rounded-4 bg-opacity-75">
             <div class="card-body">
               <h1 class="card-title mb-3">Multipliers</h1>
               <div class="card-text fs-5">
@@ -66,12 +64,10 @@
                         class="ml-2"
                         height="1em"
                         width="1em"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
+                        xmlns="http://www.w3.org/2000/svg">
                         <g id="Hashtag">
                           <path
-                            d="M20.435,15.506H16.2l.61-7h3.63a.5.5,0,0,0,.5-.5.5.5,0,0,0-.5-.5H16.9l.34-3.87a.509.509,0,0,0-.46-.54.5.5,0,0,0-.54.46l-.35,3.95H8.9l.34-3.87a.509.509,0,0,0-.46-.54.491.491,0,0,0-.54.46l-.35,3.95H3.565a.5.5,0,0,0-.5.5.5.5,0,0,0,.5.5h4.24l-.62,7H3.565a.5.5,0,0,0-.5.5.5.5,0,0,0,.5.5h3.54l-.34,3.86a.508.508,0,0,0,.45.54h.05a.516.516,0,0,0,.5-.46l.34-3.94h7l-.34,3.86a.508.508,0,0,0,.45.54h.05a.516.516,0,0,0,.5-.46l.34-3.94h4.33a.5.5,0,0,0,.5-.5A.5.5,0,0,0,20.435,15.506Zm-5.25,0H8.2l.61-7h7Z"
-                          ></path>
+                            d="M20.435,15.506H16.2l.61-7h3.63a.5.5,0,0,0,.5-.5.5.5,0,0,0-.5-.5H16.9l.34-3.87a.509.509,0,0,0-.46-.54.5.5,0,0,0-.54.46l-.35,3.95H8.9l.34-3.87a.509.509,0,0,0-.46-.54.491.491,0,0,0-.54.46l-.35,3.95H3.565a.5.5,0,0,0-.5.5.5.5,0,0,0,.5.5h4.24l-.62,7H3.565a.5.5,0,0,0-.5.5.5.5,0,0,0,.5.5h3.54l-.34,3.86a.508.508,0,0,0,.45.54h.05a.516.516,0,0,0,.5-.46l.34-3.94h7l-.34,3.86a.508.508,0,0,0,.45.54h.05a.516.516,0,0,0,.5-.46l.34-3.94h4.33a.5.5,0,0,0,.5-.5A.5.5,0,0,0,20.435,15.506Zm-5.25,0H8.2l.61-7h7Z"></path>
                         </g></svg
                       >` : target.type === 15 ? `<svg
                         stroke="currentColor"
@@ -83,19 +79,15 @@
                         class="ml-2"
                         height="1em"
                         width="1em"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
+                        xmlns="http://www.w3.org/2000/svg">
                         <path
                           stroke="none"
                           d="M0 0h24v24H0z"
-                          fill="none"
-                        ></path>
+                          fill="none"></path>
                         <path
-                          d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10"
-                        ></path>
+                          d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10"></path>
                         <path
-                          d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2"
-                        ></path></svg
+                          d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2"></path></svg
                       >` : null %> <%= target.name %>
                     </li>
                     <% } else if ( multiplier.type == "Role" ) { %>
@@ -111,7 +103,8 @@
           </div>
         </div>
         <div class="col-12 col-md-6 col-lg-12" id="role">
-          <div class="card mt-3 mt-md-2 bg-dark text-white rounded-4 bg-opacity-75">
+          <div
+            class="card mt-3 mt-md-2 bg-dark text-white rounded-4 bg-opacity-75">
             <div class="card-body">
               <h1 class="card-title mb-3">Role Rewards</h1>
               <div class="card-text fs-5">
