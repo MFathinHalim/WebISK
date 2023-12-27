@@ -36,16 +36,21 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  req.fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+  next()
+})
+
 app.get("/", function (req, res) {
-  res.render("home", { title: "Home" });
+  res.render("home", { title: "Home", url: req.fullUrl });
 });
 
 app.get("/info", (req, res) => {
-  res.render("info", { title: "Information" });
+  res.render("info", { title: "Information", url: req.fullUrl });
 });
 
 app.get("/leaderboard", function (req, res) {
-  res.render("leaderboard", { title: "Leaderboard", levelingData });
+  res.render("leaderboard", { title: "Leaderboard", url: req.fullUrl, levelingData });
 });
 
 const port = 8080;
