@@ -2,8 +2,6 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 
-require("dotenv").config();
-
 const { JSDOM } = require("jsdom");
 
 let levelingData;
