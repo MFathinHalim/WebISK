@@ -492,5 +492,101 @@
     </script>
 
     <!-- Your custom scripts remain the same -->
+<style>
+.reveal {
+  opacity: 0;
+}
+
+.reveal.active {
+  opacity: 1;
+}
+
+.active.fade-bottom {
+  animation: fade-bottom 750ms ease-in;
+}
+
+.active.fade-left {
+  animation: fade-left 750ms ease-in;
+}
+
+.active.fade-right {
+  animation: fade-right 750ms ease-in;
+}
+
+@keyframes fade-bottom {
+  0% {
+    transform: translateY(200px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-left {
+  0% {
+    transform: translateX(-200px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-right {
+  0% {
+    transform: translateX(200px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@media (min-width: 1200px) {
+  .max-1200 {
+    max-width: 1200px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+.bg-dark {
+  background-color: #101010 !important;
+}
+
+.navbar-dark {
+  /* From https://css.glass */
+  background: rgba(16, 16, 16, 0.24) !important;
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
+}
+
+.btn-primary {
+  background: #5865f2;
+}
+.btn-danger {
+  background-color: #f00;
+}
+.btn-primary:hover {
+  background: #5865f2 !important;
+}
+.btn-danger:hover {
+  background-color: #f00 !important;
+}
+
+body {
+  font-family: "Karla";
+}
+.card {
+  background-color: rgb(38, 38, 38) !important;
+  border-style: groove;
+  border-color: rgb(73, 73, 73);
+}
+::-webkit-scrollbar {
+  display: none;
+}
+</style>
   </body>
 </html>
