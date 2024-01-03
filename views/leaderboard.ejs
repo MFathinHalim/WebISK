@@ -6,6 +6,18 @@
       <div class="card pt-3 pb-1 rounded-4 mb-2 mb-lg-0">
         <h1 class="text-white fw-bold mb-3">Leaderboard</h1>
         <div class="table-responsive-md px-3 mx-2">
+          <div class="pagination d-flex justify-content-between mt-4">
+            <% if (page > 1) { %>
+            <a href="?p=<%= page - 1 %>" class="btn btn-secondary"
+              >&laquo; Previous</a
+            >
+            <% } %> <% if (page < pageCount) { %>
+            <a href="?p=<%= page + 1 %>" class="btn btn-success"
+              >Next &raquo;</a
+            >
+            <% } %>
+          </div>
+
           <table class="table table-dark fs-4 align-middle opacity-75">
             <thead>
               <tr>
@@ -19,7 +31,7 @@
             <tbody>
               <% levelingData.levels.forEach((user, i) => { %>
               <tr>
-                <td class="px-3"><%= i + 1 %></td>
+                <td class="px-3"><%= (page - 1) * 10 + i + 1 %></td>
                 <td class="px-3">
                   <img
                     src="https://cdn.discordapp.com/avatars/<%= user.userId %>/<%= user.avatar %>.webp?size=64"

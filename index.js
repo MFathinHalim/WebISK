@@ -6,7 +6,7 @@ require("dotenv").config();
 
 const { JSDOM } = require("jsdom");
 
-let levelingData;
+let levelingData = [];
 
 const refreshLeaderboardData = () => {
   JSDOM.fromURL("https://lurkr.gg/levels/1054414599945998416")
@@ -54,7 +54,22 @@ app.get("/info", (req, res) => {
 });
 
 app.get("/leaderboard", function (req, res) {
-  res.render("leaderboard", { title: "Leaderboard", levelingData });
+  const pageCount = Math.ceil((levelingData.levels || []).length / 10);
+  let page = parseInt(req.query.p) || 1;
+
+  if (page > pageCount) {
+    page = pageCount;
+  }
+
+  const temp = { ...levelingData }; // Use the spread operator to create a shallow copy
+  temp.levels = (levelingData.levels || []).slice(page * 10 - 10, page * 10);
+
+  res.render("leaderboard", {
+    title: "Leaderboard",
+    levelingData: temp,
+    page: page,
+    pageCount: pageCount, // Optionally pass the total number of pages to the view
+  });
 });
 
 const port = 8080;
