@@ -48,7 +48,7 @@
             <tbody>
               <% levelingData.levels.forEach((user, i) => { %>
               <tr>
-                <td class="px-2"><%= i + 1 %></td>
+                <td class="px-2"><%= (page - 1) * 10 + i + 1; %></td>
                 <td class="px-2">
                   <img
                     src="https://cdn.discordapp.com/avatars/<%= user.userId %>/<%= user.avatar %>.webp?size=64"
