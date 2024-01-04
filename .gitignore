@@ -131,3 +131,6 @@ dist
 
 # config file
 config.json
+
+.replit
+replit.nix

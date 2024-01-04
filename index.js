@@ -2,8 +2,6 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 
-require("dotenv").config();
-
 const { JSDOM } = require("jsdom");
 
 let levelingData = [];
@@ -37,20 +35,15 @@ app.use(
     extended: true,
   })
 );
-const saranRouter = require("./routes/saran.js");
 
 app.use("/saran", saranRouter);
 
 app.get("/", function (req, res) {
-  res.render("home", { title: "Home" });
-});
-
-app.get("/rules", (req, res) => {
-  res.render("rules", { title: "Rules" });
+  res.render("home", { title: "Home", url: req.fullUrl });
 });
 
 app.get("/info", (req, res) => {
-  res.render("info", { title: "Information" });
+  res.render("info", { title: "Information", url: req.fullUrl });
 });
 
 app.get("/leaderboard", function (req, res) {
@@ -88,32 +81,3 @@ const port = 8080;
 app.listen(port, () => {
   console.log(`App is running on port ${port}`);
 });
-// client
-//   .login(process.env.DISCORDBOTTOKEN)
-//   .then(async () => {
-//     console.log(`Logged in as ${client.user.tag}`);
-
-//     const channelSaran = await getChannelSaran();
-
-//     const SaranRouter = require("./routes/Saran.js");
-
-//     const saranRouter = new SaranRouter(channelSaran).getRouter();
-
-//     app.use("/saran", saranRouter);
-
-//     refreshStaffData();
-
-//     setInterval(refreshStaffData, 1000 * 60 * 60 * 24);
-
-//     app.listen(port, () => {
-//       console.log(`App is running on port ${port}`);
-//     });
-//   })
-//   .catch((err) => {
-//     console.error("Cannot login to discord", err);
-//     console.log("Disable /saran");
-
-//     app.listen(port, () => {
-//       console.log(`App is running on port ${port}`);
-//     });
-//   });

@@ -4,7 +4,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ISK WebPage | <%= title %></title>
+
+    <title>Intergalactic Science Kingdom | <%= title %></title>
+    <meta name="description" content="Intergalactic Science Kingdom adalah sebuah server Discord dimana kita dapat mengobrol, menemukan teman baru, belajar bersama dalam banyak hal!" />
+    <meta name="keywords" content="Science, Discord, Server" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/Wibu-Developer/WebISK/master/public/image/LogoISK.gif" />
+    <meta property="og:image:alt" content="Logo ISK" />
+    <meta property="og:site_name" content="Intergalactic Science Kingdom" />
+    <meta property="og:type" content="object" />
+    <meta property="og:title" content="Intergalactic Science Kingdom | <%= title %>" />
+    <meta property="og:url" content="<%= url %>" />
+    <meta property="og:description" content="Intergalactic Science Kingdom adalah sebuah server Discord dimana kita dapat mengobrol, menemukan teman baru, belajar bersama dalam banyak hal!" />
+
     <link rel="icon" type="image/gif" href="image/LogoISK.gif" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/reveal.css" />
@@ -147,10 +158,11 @@
           <ul
             class="navbar-nav mb-2 mb-lg-0 col-auto col-lg-6 justify-content-center">
             <li class="nav-item">
-              <a class="nav-link" href="/info">Info</a>
+              <a class="nav-link <%= title == 'Information' ? 'active' : null %>" href="/info">Info</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/leaderboard">Leaderboard</a>
+              <a class="nav-link <%= title == 'Leaderboard' ? 'active' : null %>" href="/leaderboard">Leaderboard</a>
+
             </li>
             <li class="nav-item">
               <a class="nav-link" href="https://blog.sciencekingdom.gg/">
@@ -170,6 +182,7 @@
           </a>
         </div>
       </div>
+    </div>
     </nav>
   </body>
 </html>
