@@ -54,21 +54,32 @@ app.get("/info", (req, res) => {
 });
 
 app.get("/leaderboard", function (req, res) {
-  const pageCount = Math.ceil((levelingData.levels || []).length / 10);
+  let filteredData = levelingData.levels || [];
+
+  const pageCount = Math.ceil(filteredData.length / 10);
   let page = parseInt(req.query.p) || 1;
+  const usernameToSearch = req.query.username;
+
+  if (usernameToSearch) {
+    // If a username is provided in the query, filter the data based on the username
+    filteredData = filteredData.filter(
+      (user) => user.username && user.username.includes(usernameToSearch)
+    );
+  }
 
   if (page > pageCount) {
     page = pageCount;
   }
 
   const temp = { ...levelingData }; // Use the spread operator to create a shallow copy
-  temp.levels = (levelingData.levels || []).slice(page * 10 - 10, page * 10);
+  temp.levels = filteredData.slice((page - 1) * 10, page * 10);
 
   res.render("leaderboard", {
     title: "Leaderboard",
     levelingData: temp,
     page: page,
-    pageCount: pageCount, // Optionally pass the total number of pages to the view
+    pageCount: pageCount,
+    searchTerm: usernameToSearch,
   });
 });
 
