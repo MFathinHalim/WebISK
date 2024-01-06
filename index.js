@@ -22,7 +22,7 @@ const refreshLeaderboardData = () => {
 
 refreshLeaderboardData();
 
-setInterval(refreshLeaderboardData, 60000);
+setInterval(refreshLeaderboardData, 45000);
 
 const app = express();
 
@@ -35,8 +35,6 @@ app.use(
     extended: true,
   })
 );
-
-app.use("/saran", saranRouter);
 
 app.get("/", function (req, res) {
   res.render("home", { title: "Home", url: req.fullUrl });
@@ -72,6 +70,7 @@ app.get("/leaderboard", function (req, res) {
     levelingData: temp,
     page: page,
     pageCount: pageCount,
+    url: req.fullUrl,
     searchTerm: usernameToSearch,
   });
 });
