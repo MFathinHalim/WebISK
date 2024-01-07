@@ -103,7 +103,8 @@
             <div class="card-body">
               <h1 class="card-title mb-3">Multipliers</h1>
               <div class="card-text fs-5">
-                <% levelingData.multipliers.forEach(multiplier => { %>
+                <% const addedNames =
+                [];levelingData.multipliers.forEach(multiplier => { %>
                 <div class="mb-4">
                   <h4>
                     <%= multiplier.type %> - x<%= multiplier.multiplier %>
@@ -146,11 +147,12 @@
                           d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2"></path></svg
                       >` : null %> <%= target.name %>
                     </li>
-                    <% } else if ( multiplier.type == "Role" ) { %>
+                    <% } else if ( multiplier.type == "Role"&&
+                    !addedNames[target.name] ) { %>
                     <li style="color: #<%= target.color.toString(16) %>">
                       @<%= target.name %>
                     </li>
-                    <% } %> <% }) %>
+                    <% addedNames[target.name] = true; %> <% } %> <% }) %>
                   </ul>
                 </div>
                 <% }) %>
@@ -195,5 +197,4 @@
       `max-height: ${height}px !important; overflow-y: scroll`
     );
 </script>
-
 <%- include("partials/footer") %>
