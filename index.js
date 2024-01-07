@@ -64,15 +64,20 @@ app.get("/leaderboard", function (req, res) {
 
   const temp = { ...levelingData }; // Use the spread operator to create a shallow copy
   temp.levels = filteredData.slice((page - 1) * 10, page * 10);
-
+  let levels = [];
+  for (let i = 0; i < temp.levels.length; i++) {
+    const originalIndex = levelingData.levels.indexOf(temp.levels[i]);
+    levels.push(originalIndex + 1);
+  }
   res.render("leaderboard", {
     title: "Leaderboard",
+    levels: levels,
     levelingData: temp,
     page: page,
     pageCount: pageCount,
     url: req.fullUrl,
     searchTerm: usernameToSearch,
-    url: req.fullUrl
+    url: req.fullUrl,
   });
 });
 

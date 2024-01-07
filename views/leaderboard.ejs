@@ -6,10 +6,6 @@
     color: lightcyan !important;
     opacity: 1; /* Firefox */
   }
-  table tr td,
-  table tr th {
-    background-color: rgba(0, 0, 0, 0) !important;
-  }
 </style>
 <div class="container-fluid text-center my-3">
   <div class="row p-3">
@@ -40,9 +36,11 @@
             </div>
           </form>
 
-          <table class="table table-dark fs-4 align-middle opacity-75">
-            <thead>
-              <tr>
+          <table
+            class="table table-dark bg-transparent fs-4 align-middle opacity-75"
+            style="background-color: transparent !important">
+            <thead style="background-color: transparent">
+              <tr style="background-color: transparent !important">
                 <th class="px-2" scope="col">Rank</th>
                 <th class="px-2" scope="col" colspan="2">User</th>
                 <th class="px-2" scope="col">XP</th>
@@ -50,11 +48,17 @@
                 <th class="px-2" scope="col">Level</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody style="background-color: transparent">
               <% levelingData.levels.forEach((user, i) => { %>
-              <tr>
-                <td class="px-2"><%= (page - 1) * 10 + i + 1; %></td>
-                <td class="px-2">
+              <tr style="background-color: transparent">
+                <td
+                  style="background-color: transparent !important"
+                  class="px-2">
+                  <%= levels[i]; %>
+                </td>
+                <td
+                  style="background-color: transparent !important"
+                  class="px-2">
                   <img
                     src="https://cdn.discordapp.com/avatars/<%= user.userId %>/<%= user.avatar %>.webp?size=64"
                     alt="<%= user.tag %> avatar"
@@ -62,13 +66,28 @@
                     width="64"
                     onerror="this.onerror=null; this.src='https://cdn.discordapp.com/embed/avatars/1.png'" />
                 </td>
-                <td class="px-2">
+                <td
+                  class="px-2"
+                  style="background-color: transparent !important;color: <%= levels[i] === 1 ? '#FFBB5C' : levels[i] === 2 ? '#C0C0C0' : levels[i] === 3 ? '#B5592A' : 'white'; %>">
                   <%= user.username + (user.discriminator !== "0" ?
                   `#${user.discriminator}` : "") %>
                 </td>
-                <td class="px-2"><%= user.xp %></td>
-                <td class="px-2"><%= user.messageCount %></td>
-                <td class="px-2"><%= user.level %></td>
+
+                <td
+                  style="background-color: transparent !important"
+                  class="px-2">
+                  <%= user.xp %>
+                </td>
+                <td
+                  style="background-color: transparent !important"
+                  class="px-2">
+                  <%= user.messageCount %>
+                </td>
+                <td
+                  style="background-color: transparent !important"
+                  class="px-2">
+                  <%= user.level %>
+                </td>
               </tr>
               <% }) %>
             </tbody>
@@ -165,18 +184,16 @@
   </div>
 </div>
 
-    <script>
-      const height =
-        document.getElementById("role").getBoundingClientRect().bottom -
-        document.getElementById("multiplier").getBoundingClientRect().top;
-      document
-        .getElementById("leaderboard")
-        .setAttribute(
-          "style",
-          `max-height: ${height}px !important; overflow-y: scroll`
-        );
-    </script>
+<script>
+  const height =
+    document.getElementById("role").getBoundingClientRect().bottom -
+    document.getElementById("multiplier").getBoundingClientRect().top;
+  document
+    .getElementById("leaderboard")
+    .setAttribute(
+      "style",
+      `max-height: ${height}px !important; overflow-y: scroll`
+    );
+</script>
 
-    <%- include("partials/footer") %>
-  </div>
-</div>
+<%- include("partials/footer") %>
