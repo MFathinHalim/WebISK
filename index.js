@@ -72,6 +72,7 @@ app.get("/leaderboard", function (req, res) {
     pageCount: pageCount,
     url: req.fullUrl,
     searchTerm: usernameToSearch,
+    url: req.fullUrl
   });
 });
 
