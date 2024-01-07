@@ -37,15 +37,41 @@
           </form>
 
           <table
-            class="table table-dark bg-transparent fs-4 align-middle opacity-75"
+            class="table table-dark bg-transparent mt-2 fs-4 align-middle opacity-75"
             style="background-color: transparent !important">
             <thead style="background-color: transparent">
               <tr style="background-color: transparent !important">
-                <th class="px-2" scope="col">Rank</th>
-                <th class="px-2" scope="col" colspan="2">User</th>
-                <th class="px-2" scope="col">XP</th>
-                <th class="px-2" scope="col">Messages</th>
-                <th class="px-2" scope="col">Level</th>
+                <th
+                  class="px-2"
+                  style="background-color: transparent"
+                  scope="col">
+                  Rank
+                </th>
+                <th
+                  class="px-2"
+                  style="background-color: transparent"
+                  scope="col"
+                  colspan="2">
+                  User
+                </th>
+                <th
+                  class="px-2"
+                  style="background-color: transparent"
+                  scope="col">
+                  XP
+                </th>
+                <th
+                  class="px-2"
+                  style="background-color: transparent"
+                  scope="col">
+                  Messages
+                </th>
+                <th
+                  class="px-2"
+                  style="border: 1px solid gray; background-color: transparent"
+                  scope="col">
+                  Level
+                </th>
               </tr>
             </thead>
             <tbody style="background-color: transparent">
@@ -68,23 +94,40 @@
                 </td>
                 <td
                   class="px-2"
-                  style="background-color: transparent !important;color: <%= levels[i] === 1 ? '#FFBB5C' : levels[i] === 2 ? '#C0C0C0' : levels[i] === 3 ? '#B5592A' : 'white'; %>">
+                  style="background-color: transparent !important;
+                       <%= levels[i] === 1 ? 'color: #f6e177;' :
+                           levels[i] === 2 ? 'color: #d0d8de;' :
+                           levels[i] === 3 ? 'color: #de9162;' : 'color: #bebebe;';
+                       %><%= i < 3 ? 'font-weight: bold;' : '' %>">
                   <%= user.username + (user.discriminator !== "0" ?
                   `#${user.discriminator}` : "") %>
                 </td>
 
                 <td
-                  style="background-color: transparent !important"
+                  style="
+    background-color: transparent !important;
+    <%= levels[i] === 1 ? 'color: #f6e177;' :
+       levels[i] === 2 ? 'color: #d0d8de;' :
+       levels[i] === 3 ? 'color: #de9162;' : 'color: #aad9bb;' %>"
                   class="px-2">
-                  <%= user.xp %>
+                  <%= user.xp >= 1e6 ? (user.xp / 1e6).toFixed(1) + 'M' :
+                  user.xp >= 1e3 ? (user.xp / 1e3).toFixed(1) + 'K' : user.xp %>
                 </td>
+
                 <td
                   style="background-color: transparent !important"
                   class="px-2">
                   <%= user.messageCount %>
                 </td>
                 <td
-                  style="background-color: transparent !important"
+                  style="
+                    background-color: transparent;
+                    border: 1px solid gray;
+                    <%= levels[i] === 1 ? 'color: #f6e177;' :
+                    levels[i] === 2 ? 'color: #d0d8de;' :
+                    levels[i] === 3 ? 'color: #de9162;' : 'color: white;';
+                %>
+                  "
                   class="px-2">
                   <%= user.level %>
                 </td>
